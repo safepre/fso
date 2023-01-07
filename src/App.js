@@ -1,26 +1,41 @@
 import { useState } from 'react'
+import Note from './components/Note'
 
-const Display = props => <div>{props.value}</div>
+const App = (props) => {
+  const [notes, setNotes] = useState(props.notes)
+  const[newNotes,setNewNote] = useState('a new note..')
 
-const Button = (props) => (
-  <button onClick={props.handleClick}>
-    {props.text}
-  </button>
-)
+  const addNote = (event) => {
+    event.preventDefault()
+    const noteObject = {
+      content: newNotes,
+      date: new Date().toISOString(),
+      important: Math.random() > 0.5,
+      id: notes.length + 1,
+    }
 
-const App = () => {
-  const [value, setValue] = useState(10)
+    setNotes(notes.concat(noteObject))
+    setNewNote('')
+  }
 
-  const setToValue = newValue => {
-    console.log('value now', newValue)
-    setValue(newValue)
+  const handleNoteChange = (event) => {
+    console.log(event.target.value)
+    setNewNote(event.target.value)
   }
 
   return (
     <div>
-      <Button handleClick={() => setToValue(1000)} text="thousand" />
-      <Button handleClick={() => setToValue(0)} text="reset" />
-      <Button handleClick={() => setToValue(value + 1)} text="increment" />
+      <h1>Notes</h1>
+      <ul>
+        {notes.map(note => 
+          <Note key={note.id} note={note.content} />
+        )}
+      </ul>
+      <form onSubmit={addNote}>
+        <input value = {newNotes}
+        onChange = {handleNoteChange}/>
+        <button type="submit">save</button>
+      </form>   
     </div>
   )
 }
