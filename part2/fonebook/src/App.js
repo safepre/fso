@@ -9,11 +9,11 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber,setNewNumber] = useState('')
   const [newFilter,setFilter] = useState('')
-//  useEffect(() => 
-//  {
-//     axios.get('http://localhost:3002/persons')
-//     .then(response => setPersons(response.data))
-//  },[])
+  useEffect(() => 
+  {
+     axios.get('http://localhost:3002/persons')
+     .then(response => setPersons(response.data))
+  },[])
  
   const addName = (event) =>
   {
