@@ -43,7 +43,7 @@ const App = () => {
       handleChangeName = {handleData(setNewName)} handleChangeNumber = {handleData(setNewNumber)}
      />
       <h2>Numbers</h2>
-      <Persons  persons = {persons} filter = {newFilter} />
+      {persons && <Persons persons = {persons} filter = {newFilter} />}
     </div>
     )
   }
